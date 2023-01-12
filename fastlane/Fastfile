@@ -20,6 +20,7 @@ platform :ios do
     setup_circle_ci
   end
 
+  desc "Runs all the tests"
   lane :test do
     run_tests(
       device "iPhone SE (3rd generation) (16.2)",
