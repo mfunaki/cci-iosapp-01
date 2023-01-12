@@ -1,0 +1,32 @@
+version: 2.1
+
+orbs:
+  macos: circleci/macos@2.3.4
+  ruby: circleci/ruby@2.0.0
+
+jobs:
+  build-and-test:
+    macos:
+      xcode: 14.2.0
+    environment:
+      FL_OUTPUT_DIR: output
+      FASTLANE_LANE: test
+    steps:
+      - checkout
+      - macos/switch-ruby:
+          version: "3.1.3"
+      - ruby/install-deps
+      - run:
+          name: Fastlane
+          command: bundle exec fastnale $FASTLANE_LANE
+      - store_artifacts:
+          path: output
+      - store_test_results:
+          path: output/scan
+
+workflows:
+  build-test-adhoc:
+    jobs:
+      - build-and-test
+
+# VS Code Extension Version: 1.5.1
