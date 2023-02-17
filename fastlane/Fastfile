@@ -22,11 +22,8 @@ platform :ios do
 
   desc "Runs all the tests"
   lane :test do
-    run_tests(
-      device "iPhone SE (3rd generation) (16.2)",
-      scheme: "cci-iosapp-01",
-      include_simulator_logs: false
-    )
+    scan
+    snapshot
   end
 
   desc "Description of what the lane does"
